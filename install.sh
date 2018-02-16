@@ -32,6 +32,7 @@ app_url="http://download.linuxpanda.tech/lamp/index.php.sample"
 # 主程序
 main(){
 	setenforce 0
+	install_packages
 	mkdir -pv ${download_data_dir}
 	mkdir -pv ${download_log_dir}
 	mkdir -pv ${compile_log_dir}
@@ -39,8 +40,8 @@ main(){
 	useradd -r  -s /sbin/nologin -c "apache" apache
 	useradd -r -s /sbin/nologin -c "mysql" mysql
 	download_all_files
-	install_packages
 	compile_all_source
+	install_app
 	#other_work
 	#test_lamp
 }
@@ -66,7 +67,7 @@ download_all_files(){
 }
 install_packages(){
 	yum -y -q groupinstall "Development Tools" &> /dev/null
-	yum -y -q install cmake pcre-devel openssl-devel expat-devel ncurses-devel libxml2-devel bzip2-devel libmcrypt-devel &>/dev/null
+	yum -y -q install cmake pcre-devel openssl-devel expat-devel ncurses-devel libxml2-devel bzip2-devel libmcrypt-devel wget &>/dev/null
 	ret=$?
 	print_info    $ret  "install package" 2
 }
@@ -74,7 +75,6 @@ compile_all_source(){
 	compile_httpd
 	compile_mariadb
 	compile_php
-	install_app
 
 }
 other_work(){
@@ -185,7 +185,7 @@ compile_mariadb() {
  	sed -i '/innodb_additional_mem_pool_size/ d' /etc/my.cnf
  	chkconfig --add mysqld
  	chkconfig mysqld on
- 	service mysqld on
+ 	service mysqld start
 	echo "PATH=$mysql_prefix/bin:"'$PATH' >> /etc/profile.d/lamp.sh 
  	ss -tunl |grep 3306 
  	print_info $?  "mysql " 8 
