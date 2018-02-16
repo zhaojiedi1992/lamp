@@ -175,7 +175,7 @@ compile_mariadb() {
 	make -j $cpu_count &> $compile_log_dir/mariadb_make.log && make install &> $compile_log_dir/make_install.log
 	print_info $? "make and make install "  7
  	cd $mysql_prefix 
- 	scripts/mysql_install_db --datadir=$datadir --user mysql --basedir=$mysql_prefix
+ 	scripts/mysql_install_db --datadir=$datadir --user mysql --basedir=$mysql_prefix --ldata=$datadir
  	cp support-files/my-innodb-heavy-4G.cnf /etc/my.cnf
  	sed -i "/\[mysqld\]/ adatadir=$datadir" /etc/my.cnf
 	chown mysql.mysql $(dirname $datadir) -R
