@@ -139,8 +139,8 @@ compile_httpd(){
 	print_info $? "httpd make and make install" 6
 	echo "PATH=$http_prefix/bin:"'$PATH'  > /etc/profile.d/lamp.sh
 	cd $http_prefix
-	sed -i 's@User daemon@User apache'  conf/httpd.conf
-	sed -i 's@Group daemon@Group apache' conf/httpd.conf
+	sed -i 's@User daemon@User apache@'  conf/httpd.conf
+	sed -i 's@Group daemon@Group apache@' conf/httpd.conf
 	echo "$httpd_prefix/bin/apachectl start"   >> /etc/rc.d/rc.local
  	bin/apachectl start 
  	ss -tnl | grep ":80" &>/dev/null
