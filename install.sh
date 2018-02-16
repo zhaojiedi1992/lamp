@@ -67,7 +67,7 @@ download_all_files(){
 }
 install_packages(){
 	yum -y -q groupinstall "Development Tools" &> /dev/null
-	yum -y -q install cmake pcre-devel openssl-devel expat-devel ncurses-devel libxml2-devel bzip2-devel libmcrypt-devel wget &>/dev/null
+	yum -y -q install cmake pcre-devel openssl-devel expat-devel ncurses-devel libxml2-devel bzip2-devel libmcrypt-devel wget bzip2 &>/dev/null
 	ret=$?
 	print_info    $ret  "install package" 2
 }
