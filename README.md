@@ -3,7 +3,9 @@ centos6下lamp的编译安装
 
 ## 安装
 
+```bash
 curl https://raw.githubusercontent.com/zhaojiedi1992/lamp/master/install.sh  | bash 
+```
 
 ## 安装后的主要目录
 
