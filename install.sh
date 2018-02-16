@@ -185,6 +185,7 @@ compile_mariadb() {
  	sed -i '/innodb_additional_mem_pool_size/ d' /etc/my.cnf
  	chkconfig --add mysqld
  	chkconfig mysqld on
+	scripts/mysql_install_db --datadir=$datadir --user mysql --basedir=$mysql_prefix --ldata=$datadir
  	service mysqld start
 	echo "PATH=$mysql_prefix/bin:"'$PATH' >> /etc/profile.d/lamp.sh 
  	ss -tunl |grep 3306 
