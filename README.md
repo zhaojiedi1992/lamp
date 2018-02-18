@@ -1,5 +1,5 @@
 # lamp的脚本编译安装脚本
-centos6下lamp的编译安装
+centos6和7下lamp的编译安装
 
 ## 安装
 
